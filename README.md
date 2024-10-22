@@ -27,3 +27,7 @@ You can do this by checking `$TERM_PROGRAM`:
 zinit ice if'[[ $TERM_PROGRAM == "WezTerm" ]]'
 zinit light sei40kr/zsh-wez-man
 ```
+
+## Similar Plugins
+
+- [zsh-tmux-man](https://github.com/sei40kr/zsh-tmux-man)
