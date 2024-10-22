@@ -1,6 +1,8 @@
 WEZ_MAN_SPLIT_DIRECTION="${WEZMAN_SPLIT_DIRECTION:-right}"
 WEZ_MAN_SPLIT_SIZE="${WEZMAN_SPLIT_SIZE:-30%}"
 
+__wez_man_last_pane_id=
+
 __wez_man() {
   local cmd=( ${=BUFFER} )
   local page="${cmd[1]}"
@@ -9,6 +11,10 @@ __wez_man() {
   if ! error="$(man -w "$page" 2>&1 1>/dev/null)"; then
     zle -M "$error"
     return 1
+  fi
+
+  if [[ -n "$__wez_man_last_pane_id" ]]; then
+    wezterm cli kill-pane --pane-id "$__wez_man_last_pane_id" 2>/dev/null
   fi
 
   local -a extra_args
@@ -23,7 +29,7 @@ __wez_man() {
     extra_args+=( "--cells" "$WEZ_MAN_SPLIT_SIZE" )
   fi
   
-  wezterm cli split-pane "${extra_args[@]}" man "$page"
+  __wez_man_last_pane_id="$(wezterm cli split-pane "${extra_args[@]}" man "$page")"
 }
 
 zle -N __wez_man
