@@ -16,3 +16,14 @@ zinit light sei40kr/zsh-wez-man
 | :------------------------ | :------------ | :------------------------------------------------------------------------------------ |
 | `WEZ_MAN_SPLIT_DIRECTION` | `right`       | Which direction to split the window. Must be one of `left`, `right`, `top`, `bottom`. |
 | `WEZ_MAN_SPLIT_SIZE`      | `30%`         | The size of the split. If it ends with `%`, it's relative to the window size.         |
+
+## Tips
+
+If you're using multiple terminals, you may want to load this plugin when you're using WezTerm.
+
+You can do this by checking `$TERM_PROGRAM`:
+
+```zsh
+zinit ice if'[[ $TERM_PROGRAM == "WezTerm" ]]'
+zinit light sei40kr/zsh-wez-man
+```
